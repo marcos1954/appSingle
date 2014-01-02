@@ -1,0 +1,47 @@
+{
+
+    "settings" : {
+        "title" : "Reglages",
+		
+		
+		"textsize": {
+			"fieldlabel"   : "Taille de la Police",
+			"title"        : "Ajuster la Taille du Texte de Police"
+		},
+        "gps" : {
+            "title"  : "Localisation GPS sur la carte",
+            "enable" :  "activer le GPS" ,
+            "directions" : "Afficher le chemin",
+            "instructions" : ""
+        },
+         "notes" : {
+            "fieldlabel"   : "Affichage en liste",
+            "title" : "Mes Notes"
+        },
+        "lang" : {
+            "title" : "Sélectionnez la langue",
+            "english" : "Anglais",
+            "spanish" : "Espagnol",
+            "french"  : "Français"
+        }
+    },
+    
+    "tab" : {
+        "info"    :  "info",
+        "photos"     :  "photos",
+        "map"       :  "carte",
+        "events"      :  "events",
+        "settings"  :  "reglages"
+    },
+    
+    "buttons" : {
+        "cancel" : "Annuler",
+        "save"   : "Enregistrer",
+        "done"   : "Fait",
+        "more"   : "plus d'informations",
+		"yes"    : "Oui",
+		"no"     : "Pas",
+		"clear"  : "Effacer"
+    }
+}
+	

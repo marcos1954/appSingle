@@ -1,0 +1,46 @@
+{
+    'tab': {
+       'info':   'info',
+       'events': 'events',
+       'photos': 'photos',
+       'map':    'map',
+       'settings': 'settings'
+    },
+    
+    "settings" : {
+        "title" : "Settings",
+
+		"textsize": {
+			"fieldlabel"   : "Font Size",
+			"title"        : "Adjust Text Font Size"
+		},
+        "gps"   : {
+            "title"        : "My Location on Map",
+            "enable"       : "Show My Location",
+            "directions"   : "Show Walking Path to Places",
+            "instructions" : ""
+        },
+        "notes" : {
+            "fieldlabel"   : "Show Notes in Listings",
+            "title" : "My Notes"
+        },
+        "lang"  : {
+            "title"   : "Select Language",
+            "english" : "English",
+            "spanish" : "Spanish",
+            "french"  : "French"
+        }
+    },
+    
+    	
+    "buttons" : {
+        "cancel" : "Cancel",
+        "save"   : "Save",
+        "done"   : "Done",
+        "more"   : "more info",
+		"no"     : "No",
+		"yes"    : "Yes",
+		"clear"  : "Clear"
+    }
+	
+}

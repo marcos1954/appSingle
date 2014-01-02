@@ -1,0 +1,45 @@
+{
+    'tab': {
+       'info':   'info',
+       'events': 'eventos',
+       'photos': 'fotos',
+       'map':    'mapa',
+       'settings': 'ajustes'
+    },
+    
+    
+    "settings" : {
+        "title" : "Ajustes",
+		
+		"textsize": {
+			"fieldlabel"   : "Tamaño del Texto",
+			"title"        : "Ajustar el Tamaño de la Fuente"
+		},
+        "gps"   : {
+            "title"        : "Ubicación en el Mapa",
+            "enable"       : "Activar el GPS",
+            "directions"   : "Mostrar Camino",
+            "instructions" : ""
+        },
+         "notes" : {
+            "fieldlabel"   : "Mostrar en los listados",
+            "title" : "Mis Notas"
+        },
+        "lang"  : {
+            "title"   : "Seleccione el Idioma",
+            "english" : "Inglés",
+            "spanish" : "Español",
+            "french"  : "Francés"
+        }
+    },
+	
+    "buttons" : {
+        "cancel" : "Cancelar",
+        "save"   : "Guardar",
+        "done"   : "Guardar",
+        "more"   : "mas info",
+		"yes"    : "Sí",
+		"no"     : "No",
+		"clear"  : "Borrar"
+    }
+}
