@@ -1,7 +1,6 @@
 Ext.define('pvBiz.view.Main', {
     extend:   'Ext.tab.Panel',
     xtype:    'main',
-    requires: [],
     
     config: {
         tabBarPosition: 'bottom',
@@ -31,8 +30,6 @@ Ext.define('pvBiz.view.Main', {
             scrollable: 'vertical',
             enableLocale: true,
             locales :     { title : 'tab.events' }
-            
-            
         },{
             itemId:     'Menu',
             indicator:  true,
@@ -40,31 +37,19 @@ Ext.define('pvBiz.view.Main', {
             iconCls:    'list',
             title:      'menu',
             //enableLocale: true,
-            //locales :     { title : 'tab.photos' }
+            //locales :     { title : 'tab.menu' }
         },{
             xtype:      'placesmap',
             title:      'map',
             iconCls:    'browser',
             enableLocale: true,
             locales :     { title : 'tab.map' }
-        },
-        {
+        },{
             xtype:      'settings',
             title:      'settings',
             iconCls:    'settings',
             enableLocale: true,
             locales :     { title : 'tab.settings' }
-        }],
-        
-        listeners: {
-            initialize: function(me) {
-                console.log('init', me.getTabBar());
-                
-            
-            
-            
-            }
-        }
-    },
-    
+        }]
+    }    
 });
