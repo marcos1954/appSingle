@@ -26,68 +26,68 @@ Ext.Loader.setConfig({
 
 
 
-//if (Ext.os.version.gtEq('7')) {
-//    // iPad or Homescreen or UIWebView
-//    if (Ext.os.deviceType === 'Tablet' || !Ext.browser.is.Safari || window.navigator.standalone) {
-//        Ext.define('Ext.iOS7Fix1.Viewport', {
-//            override : 'Ext.viewport.Ios',
-//            constructor : function () {
-//                var stretchHeights = {},
-//                        stretchWidths = {},
-//                        orientation = this.determineOrientation(),
-//                        screenHeight = window.screen.height,
-//                        screenWidth = window.screen.width,
-//                        menuHeight = orientation === this.PORTRAIT
-//                                ? screenHeight - window.innerHeight
-//                                : screenWidth - window.innerHeight;
-//
-//                stretchHeights[this.PORTRAIT] = screenHeight - menuHeight;
-//                stretchHeights[this.LANDSCAPE] = screenWidth - menuHeight;
-//                stretchWidths[this.PORTRAIT] = screenWidth;
-//                stretchWidths[this.LANDSCAPE] = screenHeight;
-//
-//                this.stretchHeights = stretchHeights;
-//                this.stretchWidths = stretchWidths;
-//
-//                this.callOverridden(arguments);
-//
-//                this.on('ready', this.setViewportSizeToAbsolute, this);
-//                this.on('orientationchange', this.setViewportSizeToAbsolute, this);
-//            },
-//            getWindowHeight : function () {
-//                return this.stretchHeights[this.orientation];
-//            },
-//            getWindowWidth : function () {
-//                return this.stretchWidths[this.orientation];
-//            },
-//            setViewportSizeToAbsolute : function () {
-//                this.setWidth(this.getWindowWidth());
-//                this.setHeight(this.getWindowHeight());
-//            }
-//        });
-//    }
-//
-//    // iPad Only
-//    if (Ext.os.deviceType === 'Tablet') {
-//        Ext.define('Ext.iOS7Fix2.Viewport', {
-//            override : 'Ext.viewport.Ios',
-//            constructor : function () {
-//
-//                this.callOverridden(arguments);
-//
-//                window.addEventListener('scroll', function () {
-//                    if (window.scrollX !== 0) {
-//                        window.scrollTo(0, window.scrollY);
-//                    }
-//                }, false);
-//            },
-//            setViewportSizeToAbsolute : function () {
-//                window.scrollTo(0, 0);
-//                this.callOverridden(arguments);
-//            }
-//        });
-//    }
-//}
+if (Ext.os.version.gtEq('7')) {
+    // iPad or Homescreen or UIWebView
+    if (Ext.os.deviceType === 'Tablet' || !Ext.browser.is.Safari || window.navigator.standalone) {
+        Ext.define('Ext.iOS7Fix1.Viewport', {
+            override : 'Ext.viewport.Ios',
+            constructor : function () {
+                var stretchHeights = {},
+                        stretchWidths = {},
+                        orientation = this.determineOrientation(),
+                        screenHeight = window.screen.height,
+                        screenWidth = window.screen.width,
+                        menuHeight = orientation === this.PORTRAIT
+                                ? screenHeight - window.innerHeight
+                                : screenWidth - window.innerHeight;
+
+                stretchHeights[this.PORTRAIT] = screenHeight - menuHeight;
+                stretchHeights[this.LANDSCAPE] = screenWidth - menuHeight;
+                stretchWidths[this.PORTRAIT] = screenWidth;
+                stretchWidths[this.LANDSCAPE] = screenHeight;
+
+                this.stretchHeights = stretchHeights;
+                this.stretchWidths = stretchWidths;
+
+                this.callOverridden(arguments);
+
+                this.on('ready', this.setViewportSizeToAbsolute, this);
+                this.on('orientationchange', this.setViewportSizeToAbsolute, this);
+            },
+            getWindowHeight : function () {
+                return this.stretchHeights[this.orientation];
+            },
+            getWindowWidth : function () {
+                return this.stretchWidths[this.orientation];
+            },
+            setViewportSizeToAbsolute : function () {
+                this.setWidth(this.getWindowWidth());
+                this.setHeight(this.getWindowHeight());
+            }
+        });
+    }
+
+    // iPad Only
+    if (Ext.os.deviceType === 'Tablet') {
+        Ext.define('Ext.iOS7Fix2.Viewport', {
+            override : 'Ext.viewport.Ios',
+            constructor : function () {
+
+                this.callOverridden(arguments);
+
+                window.addEventListener('scroll', function () {
+                    if (window.scrollX !== 0) {
+                        window.scrollTo(0, window.scrollY);
+                    }
+                }, false);
+            },
+            setViewportSizeToAbsolute : function () {
+                window.scrollTo(0, 0);
+                this.callOverridden(arguments);
+            }
+        });
+    }
+}
 
 Ext.application({
     name: 'pvBiz',
@@ -101,9 +101,12 @@ requires: [
         'Ux.locale.override.st.field.Field',
         'Ux.locale.override.st.form.FieldSet',
         'Ux.locale.override.st.picker.Picker',
+        'pvBiz.controller.override.Map',
 
         'Ext.MessageBox'
     ],
+
+    
     
     models: [ 'BaseModel', 'Business', 'Cats', 'Event' ],
 
@@ -128,10 +131,12 @@ requires: [
     },
 
     isIconPrecomposed: true,
+    statusBarStyle: 'black',
 
     startupImage: {
-        '320x460': 'resources/startup/320x460.jpg',
+        '320x460': 'resources/startup/320x460.png',
         '640x920': 'resources/startup/640x920.png',
+        '640x1096': 'resources/startup/640x1096.png',
         '768x1004': 'resources/startup/768x1004.png',
         '748x1024': 'resources/startup/748x1024.png',
         '1536x2008': 'resources/startup/1536x2008.png',
@@ -142,6 +147,8 @@ requires: [
         // Destroy the #appLoadingIndicator element
         Ext.fly('appLoadingIndicator').destroy();        
         pvBiz = pvBiz || {};
+
+        
         var mgr = Ux.locale.Manager;
         
         pvBiz.readCookie = function  (name) {
@@ -185,16 +192,30 @@ requires: [
             }
         });
         
-        var store = Ext.getStore('mainstore');
-        store.getProxy().setExtraParams({
-            lang: pvBiz.lang,
-            id:   ggvId
-        });
+        try { pvBiz.ggvId = ggvId; } catch(error) {pvBiz.ggvId = 0};
+        pvBiz.hostname = location.hostname.split('.');
         
+        var store = Ext.getStore('mainstore');
+        var storeConfig = {
+            lang: pvBiz.lang,
+            id:   pvBiz.ggvId || 0
+        };        
+        
+        if (!pvBiz.ggvId && (pvBiz.hostname[1] == 'guidevallarta')) {
+            pvBiz.name = pvBiz.hostname[0];
+            
+            storeConfig = {
+                lang: pvBiz.lang,
+                name: pvBiz.hostname[0]
+            };
+        }
+        
+        store.getProxy().setExtraParams(storeConfig);
         store.load();
 
         // Initialize the main view
         Ext.Viewport.add(Ext.create('pvBiz.view.Main'));
+        Ext.Viewport.setMasked({ xtype: 'loadmask', indicator: true});
     },
 
     onUpdated: function() {

@@ -107,12 +107,12 @@ Ext.define('pvBiz.view.Settings', {
 
                                         Ux.locale.Manager.updateLocale(pvBiz.lang, function() {
                                             var store = Ext.getStore('mainstore');
+                                            var params;
                                             
                                             store.removeAll();
-                                            store.getProxy().setExtraParams({
-                                                lang: pvBiz.lang,
-                                                id:   ggvId
-                                            });
+                                            params = store.getProxy().getExtraParams();
+                                            params.lang = pvBiz.lang;
+                                            store.getProxy().setExtraParams(params);
                                             store.load();
                                         });
                                     }

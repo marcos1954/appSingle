@@ -32,6 +32,8 @@ Ext.define("pvBiz.store.Main", {
         
         listeners: {
             load: function(store, records, success) {
+                
+                Ext.Viewport.setMasked(false);
                 var photos   = Ext.Viewport.down('pinchimagecarousel'),
                     info     = Ext.Viewport.down('placesinfo'),
                     events   = Ext.Viewport.down('placesevents'),

@@ -6,7 +6,10 @@ Ext.define('pvBiz.view.Main', {
         tabBarPosition: 'bottom',
         
         tabBar: {
-            scrollable: 'horizontal'
+            scrollable: {
+                direction: 'horizontal',
+                indicators: null
+            }
         },
         
         items: [{
