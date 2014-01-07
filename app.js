@@ -221,7 +221,7 @@ requires: [
     onUpdated: function() {
         Ext.Msg.confirm(
             "Application Update",
-            "This application has just successfully been updated to the latest version. Reload now?",
+            "New Version Available. Update?",
             function(buttonId) {
                 if (buttonId === 'yes') {
                     window.location.reload();
