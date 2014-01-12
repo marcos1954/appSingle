@@ -11,6 +11,7 @@ Ext.define("pvBiz.view.PlacesMap", {
 		layout:                    'fit',
 		mapOptions: {
 			zoom:                  17,
+            center:                 new google.maps.LatLng(20.6034, -105.23370),
 			zoomControl:           true,
 			mapTypeControl:        false,
 			streetViewControl:     false,

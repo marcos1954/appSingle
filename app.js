@@ -106,8 +106,6 @@ requires: [
         'Ext.MessageBox'
     ],
 
-    
-    
     models: [ 'BaseModel', 'Business', 'Cats', 'Event' ],
 
     stores: [ 'Main' ],
@@ -120,7 +118,8 @@ requires: [
         'ImageViewer',
         'ImageCarousel',
         'Settings',
-        'Photos'
+        'Photos',
+        'Home'
     ],
 
     icon: {
@@ -134,13 +133,28 @@ requires: [
     statusBarStyle: 'black',
 
     startupImage: {
-        '320x460': 'resources/startup/320x460.png',
-        '640x920': 'resources/startup/640x920.png',
-        '640x1096': 'resources/startup/640x1096.png',
-        '768x1004': 'resources/startup/768x1004.png',
-        '748x1024': 'resources/startup/748x1024.png',
+        '320x460':   'resources/startup/320x460.png',
+        '640x920':   'resources/startup/640x920.png',
+        '640x1096':  'resources/startup/640x1096.png',
+        '768x1004':  'resources/startup/768x1004.png',
+        '748x1024':  'resources/startup/748x1024.png',
         '1536x2008': 'resources/startup/1536x2008.png',
         '1496x2048': 'resources/startup/1496x2048.png'
+    },
+
+    eventPublishers : {
+        touchGesture : {
+            recognizers : {
+                tap : {
+                    xclass:       'Ext.event.recognizer.Tap',
+                    moveDistance: 60 //8 should be default
+                },
+                longpress: {
+                    xclass:       'Ext.event.recognizer.LongPress',
+                    minDuration:  400
+                }
+            }
+        }
     },
 
     launch: function() {
@@ -209,6 +223,13 @@ requires: [
                 name: pvBiz.hostname[0]
             };
         }
+        
+        // debug test case info
+        //
+        //storeConfig = {
+        //    lang: pvBiz.lang,
+        //    name: 'casacupula'
+        //};
         
         store.getProxy().setExtraParams(storeConfig);
         store.load();

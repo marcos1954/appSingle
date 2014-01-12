@@ -45,7 +45,7 @@ Ext.define('pvBiz.view.Settings', {
                             return window.getComputedStyle(document.body, null).fontSize;
                         };
 
-                        pvBiz.txtSzBase = parseInt(pvBiz.getbodytxtsize().replace( /\D+/g, ''));
+                        pvBiz.txtSzBase = parseInt(pvBiz.getbodytxtsize().replace( /[^0123456789\.]/g,''));
                         pvBiz.txtSz = pvBiz.readCookie('txtSz') || pvBiz.txtSzBase;
                         
                         var x = pvBiz.txtSzBase;

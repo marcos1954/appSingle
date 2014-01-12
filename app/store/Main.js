@@ -34,42 +34,37 @@ Ext.define("pvBiz.store.Main", {
             load: function(store, records, success) {
                 
                 Ext.Viewport.setMasked(false);
-                var photos   = Ext.Viewport.down('pinchimagecarousel'),
+                var main     = Ext.Viewport.down('main'),
+                
+                    tabbar   = main.down('tabbar'),
+                    home     = Ext.Viewport.down('home'),
                     info     = Ext.Viewport.down('placesinfo'),
-                    events   = Ext.Viewport.down('placesevents'),
-                    map      = Ext.Viewport.down('placesmap'),
-                    menu     = Ext.Viewport.down('#Menu'),
                     record   = records[0],
                     data     = record.getData(),
                     eventsA  = [];
-                        
-                // prepare associated event info 
-                //
-                Ext.each(record.events().getRange(0), function(model, index) {
-                    var datum = model.getData();
-                    eventsA.push(datum);
-                });
-                data.eventsArray = eventsA;
-                
-                // load each view
-                //
-                info &&info.setData(data);
-                events && events.setData(data);
-                map && map.setData(data);
-                photos && photos.setData(data, 'photos');
-                menu && menu.setData(data, 'menu');
-                
-                if (!data.eventsArray.length  && events)
-                    events.destroy();
-                    
-                if (photos && !photos.getInnerItems().length)
-                    photos.destroy();
-                    
-                if (menu && !menu.getInnerItems().length)
-                    menu.destroy();
-                    
-                if (!data.list_latitude && map)
-                    map.destroy();
+
+                if (records.length > 0) {
+                    // prepare associated event info 
+                    //
+
+                    if (records.length == 1) {
+                        // prepare associated event info 
+                        //
+                        Ext.each(record.events().getRange(0), function(model, index) {
+                            var datum = model.getData();
+                            eventsA.push(datum);
+                        });
+                        data.eventsArray = eventsA;
+    
+                        main.loadViewsData(data);
+                        main.setActiveItem(info);
+                        tabbar.getComponent(0).hide()
+                    }
+                    else {
+                        main.setActiveItem(home);
+                        tabbar.getComponent(0).show();
+                    }
+                }
             }
         }
 	}
